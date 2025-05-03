@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahzaib Shahid - Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        /* Custom CSS */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.9)), url('https://source.unsplash.com/random/1920x1080/?coding') no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .skill-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #f8f9fa;
+        }
+
+        .dark-mode .navbar {
+            background-color: #1e1e1e !important;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #f8f9fa;
+        }
+
+        .dark-mode .bg-light {
+            background-color: #1e1e1e !important;
+            color: #f8f9fa;
+        }
+
+        .dark-mode .text-dark {
+            color: #f8f9fa !important;
+        }
+
+        .dark-mode .form-control {
+            background-color: #333;
+            border-color: #444;
+            color: #f8f9fa;
+        }
+
+        .dark-mode .footer {
+            background-color: #1e1e1e;
+        }
+
+        /* Progress bars */
+        .progress {
+            height: 10px;
+            margin-bottom: 15px;
+            background-color: #e9ecef;
+        }
+
+        .dark-mode .progress {
+            background-color: #333;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+        }
+
+        /* Navbar adjustments */
+        .navbar {
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .navbar.scrolled {
+            background-color: rgba(30, 30, 30, 0.95) !important;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="bi bi-moon-fill text-white"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="#">Shahzaib Shahid</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <img src="/?portrait" alt="Shahzaib Shahid" class="profile-img">
+                <h1 class="display-4 fw-bold mb-4">Shahzaib Shahid</h1>
+                <p class="lead mb-4">Computer Science Student & Developer</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="#contact" class="btn btn-light btn-lg px-4">Contact Me</a>
+                    <a href="#projects" class="btn btn-outline-light btn-lg px-4">View Projects</a>
+                </div>
+                <div class="mt-5">
+                    <a href="https://github.com" target="_blank" class="text-white me-3 fs-3"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="text-white me-3 fs-3"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="text-white me-3 fs-3"><i class="bi bi-twitter"></i></a>
+                    <a href="mailto:shahzaibshahid149@gmail.com" class="text-white fs-3"><i class="bi bi-envelope-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 fade-in">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="lead">Passionate computer science student with a focus on software development and problem-solving.</p>
+                    <p>I am a dedicated computer science student who began my academic journey in 2022. I have a strong foundation in programming fundamentals, data structures, and algorithms. My passion lies in creating efficient solutions and learning new technologies to expand my skill set.</p>
+                    <p>Throughout my studies, I've worked on various projects that have helped me develop practical skills in web development, mobile applications, and software engineering. I'm constantly seeking opportunities to apply my knowledge and grow as a developer.</p>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-primary me-3">Download CV</a>
+                        <a href="#contact" class="btn btn-outline-primary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="mb-4">Personal Information</h3>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Name:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Shahzaib Shahid
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Email:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    shahzaibshahid149@gmail.com
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Phone:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    0307xxxxxxxx
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Student Since:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    2022
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Languages:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    English, Urdu
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <strong>Availability:</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Part-time, Internships
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">My Skills</h2>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 fade-in">
+                    <h3 class="mb-4">Technical Skills</h3>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Java</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>C++</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>SQL</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 fade-in">
+                    <h3 class="mb-4">Frameworks & Tools</h3>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>HTML/CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Bootstrap</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>React.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Node.js</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Git/GitHub</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-code-slash"></i>
+                            </div>
+                            <h4 class="card-title">Web Development</h4>
+                            <p class="card-text">Experience in building responsive websites and web applications using HTML, CSS, JavaScript, and modern frameworks.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <h4 class="card-title">Mobile Development</h4>
+                            <p class="card-text">Knowledge of developing mobile applications using React Native and exploring native Android development.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-database"></i>
+                            </div>
+                            <h4 class="card-title">Database Management</h4>
+                            <p class="card-text">Understanding of database design, SQL queries, and working with both SQL and NoSQL databases.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-gear"></i>
+                            </div>
+                            <h4 class="card-title">Problem Solving</h4>
+                            <p class="card-text">Strong analytical skills and ability to solve complex problems using efficient algorithms and data structures.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h4 class="card-title">Team Collaboration</h4>
+                            <p class="card-text">Experience working in team environments, using version control systems, and participating in collaborative projects.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card skill-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="skill-icon">
+                                <i class="bi bi-book"></i>
+                            </div>
+                            <h4 class="card-title">Continuous Learning</h4>
+                            <p class="card-text">Passionate about staying updated with the latest technologies and continuously improving my skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">My Projects</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?website" class="card-img-top project-img" alt="E-commerce Website">
+                        <div class="card-body">
+                            <h5 class="card-title">E-commerce Website</h5>
+                            <p class="card-text">A responsive e-commerce website with product listings, shopping cart, and user authentication.</p>
+                            <p class="text-muted mb-3">Technologies: HTML, CSS, JavaScript, Bootstrap</p>
+                            <p class="text-muted mb-3">Date: March 2023</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?mobile" class="card-img-top project-img" alt="Student Management App">
+                        <div class="card-body">
+                            <h5 class="card-title">Student Management App</h5>
+                            <p class="card-text">A web application for managing student records, attendance, and performance tracking.</p>
+                            <p class="text-muted mb-3">Technologies: React.js, Node.js, MongoDB</p>
+                            <p class="text-muted mb-3">Date: August 2023</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?weather" class="card-img-top project-img" alt="Weather App">
+                        <div class="card-body">
+                            <h5 class="card-title">Weather Forecast App</h5>
+                            <p class="card-text">A weather application that provides current weather and forecasts using a third-party API.</p>
+                            <p class="text-muted mb-3">Technologies: JavaScript, API Integration, Bootstrap</p>
+                            <p class="text-muted mb-3">Date: January 2024</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?calculator" class="card-img-top project-img" alt="Scientific Calculator">
+                        <div class="card-body">
+                            <h5 class="card-title">Scientific Calculator</h5>
+                            <p class="card-text">A web-based scientific calculator with advanced mathematical functions and history tracking.</p>
+                            <p class="text-muted mb-3">Technologies: HTML, CSS, JavaScript</p>
+                            <p class="text-muted mb-3">Date: May 2023</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?chat" class="card-img-top project-img" alt="Chat Application">
+                        <div class="card-body">
+                            <h5 class="card-title">Real-time Chat Application</h5>
+                            <p class="card-text">A real-time messaging application with private and group chat functionality.</p>
+                            <p class="text-muted mb-3">Technologies: Socket.io, React, Express</p>
+                            <p class="text-muted mb-3">Date: November 2023</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="card project-card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?todo" class="card-img-top project-img" alt="Task Manager">
+                        <div class="card-body">
+                            <h5 class="card-title">Task Manager Application</h5>
+                            <p class="card-text">A task management application with features for organizing, prioritizing, and tracking tasks.</p>
+                            <p class="text-muted mb-3">Technologies: React, LocalStorage, Bootstrap</p>
+                            <p class="text-muted mb-3">Date: April 2024</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Demo</a>
+                                <a href="#" class="btn btn-primary btn-sm">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 fade-in">
+                <a href="#" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Education & Achievements</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 fade-in">
+                    <h3 class="mb-4">Education</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Bachelor of Science in Computer Science</h4>
+                            <p class="timeline-date">2022 - Present</p>
+                            <p class="text-muted">University Name</p>
+                            <p>Currently pursuing a degree in Computer Science with focus on software development, data structures, algorithms, and web technologies. Maintaining a strong academic record with a GPA of 3.7/4.0.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>High School Diploma</h4>
+                            <p class="timeline-date">2018 - 2022</p>
+                            <p class="text-muted">High School Name</p>
+                            <p>Graduated with honors. Participated in various science and mathematics competitions. Developed interest in programming and computer science during this period.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 fade-in">
+                    <h3 class="mb-4">Certifications & Achievements</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Web Development Bootcamp</h4>
+                            <p class="timeline-date">June 2023</p>
+                            <p>Completed an intensive web development bootcamp covering front-end and back-end technologies, resulting in the development of a full-stack web application.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Programming Competition Finalist</h4>
+                            <p class="timeline-date">November 2023</p>
+                            <p>Reached the finals of a regional programming competition, demonstrating problem-solving skills and algorithmic thinking.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Certifications</h4>
+                            <p class="timeline-date">2022 - Present</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">JavaScript Algorithms and Data Structures (FreeCodeCamp)</li>
+                                <li class="mb-2">Responsive Web Design (FreeCodeCamp)</li>
+                                <li class="mb-2">Python for Everybody (Coursera)</li>
+                                <li>Introduction to Git and GitHub (Coursera)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Get In Touch</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 fade-in">
+                    <div class="card border-0 shadow-sm mb-4 mb-lg-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4">Contact Information</h3>
+                            
+                            <div class="contact-info">
+                                <div class="contact-icon">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Location</h5>
+                                    <p class="mb-0">Pakistan</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info">
+                                <div class="contact-icon">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Email</h5>
+                                    <p class="mb-0">shahzaibshahid149@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info">
+                                <div class="contact-icon">
+                                    <i class="bi bi-telephone-fill"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Phone</h5>
+                                    <p class="mb-0">0307xxxxxxxx</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info">
+                                <div class="contact-icon">
+                                    <i class="bi bi-clock-fill"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Availability</h5>
+                                    <p class="mb-0">Weekdays: 10 AM - 6 PM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5 class="mb-3">Follow Me</h5>
+                                <div class="d-flex">
+                                    <a href="https://github.com" target="_blank" class="me-3 fs-4 text-dark"><i class="bi bi-github"></i></a>
+                                    <a href="https://linkedin.com" target="_blank" class="me-3 fs-4 text-primary"><i class="bi bi-linkedin"></i></a>
+                                    <a href="https://twitter.com" target="_blank" class="me-3 fs-4 text-info"><i class="bi bi-twitter"></i></a>
+                                    <a href="https://instagram.com" target="_blank" class="fs-4 text-danger"><i class="bi bi-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 fade-in">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4">Send Me a Message</h3>
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Shahzaib Shahid</h5>
+                    <p class="mb-0">Computer Science Student & Developer</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2025 Shahzaib Shahid. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            body.classList.add('dark-mode');
+            icon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-dark');
+                });
+                if (body.classList.contains('dark-mode')) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-dark');
+                        link.classList.add('text-white');
+                    });
+                }
+            } else {
+                navbar.classList.remove('scrolled');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-dark');
+                    link.classList.add('text-white');
+                });
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the form data to a server
+            // For demonstration, we'll just log it and show an alert
+            console.log({ name, email, subject, message });
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
